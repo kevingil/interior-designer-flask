@@ -25,8 +25,8 @@ function Index() {
         <p>{message}</p>
         </div>
 
-      {people.map((person, index) => (
-        <div key={index}>{person}</div>
+      {people.map((p, index) => (
+        <div key={index}>{p}</div>
       ))}
         <div className="bg-slate-800 col-span-3 rounded shadow p-2
         w-xl m-2">
