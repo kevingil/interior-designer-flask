@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 
-function index() {
-  const [message, setMessage] = useState("Loading");
+function Index() {
+  const [message, setMessage] = useState("Loading connection");
   const [people, setPeople] = useState([]);
 
   useEffect(() => {
@@ -17,14 +17,24 @@ function index() {
   }, []);
 
   return (
-    <div>
-      <div>{message}</div>
+    <div className="w-full h-full grid grid-cols-4">
+
+      <div className="bg-slate-800 rounded shadow p-2
+      w-xl m-2">
+        <h3 className="p-2">Your Room</h3>
+        <p>{message}</p>
+        </div>
 
       {people.map((person, index) => (
         <div key={index}>{person}</div>
       ))}
+        <div className="bg-slate-800 col-span-3 rounded shadow p-2
+        w-xl m-2">
+
+<h3 className="p-2">AI Render</h3>
+        </div>
     </div>
   );
 }
 
-export default index;
+export default Index;
