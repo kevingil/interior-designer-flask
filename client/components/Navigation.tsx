@@ -10,7 +10,7 @@ const Navigation = () => {
         <li>
           <a href="https://github.com/kevingil/interior-designer">Github</a>
         </li>
-        {/* Add more navigation links as needed */}
+      
       </ul>
     </nav>
   );

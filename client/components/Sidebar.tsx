@@ -35,8 +35,7 @@ function SideBar() {
 
     const handleSubmit = (event: React.FormEvent) => {
         event.preventDefault();
-        // Make the API request using formData
-        console.log(formData); // Replace with your API request code
+        console.log(formData); 
     };
 
     return (
