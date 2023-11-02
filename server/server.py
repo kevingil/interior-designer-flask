@@ -10,7 +10,7 @@ CORS(app)
 def return_home():
     return jsonify({
         'message': "Backend works",
-        'people': ['Test1', 'Test2', 'Test3']
+        'array': ['1', '2', '3 testing...']
     })
 
 

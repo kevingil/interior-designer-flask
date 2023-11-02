@@ -5,9 +5,9 @@ import RenderArea from "../components/RenderArea";
 
 function Index() {
   return (
-    <div className="w-full h-full">
+    <div className="h-full px-2">
       <Navigation /> 
-      <div className="w-full h-full grid grid-cols-4">
+      <div className="flex flex-col-reverse sm:flex-row auto-cols-max">
       <Sidebar/>
       <RenderArea/>
         </div>
