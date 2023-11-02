@@ -12,9 +12,7 @@ from client/
 npm install
 
 from server/ 
-pip install flask 
-pip install flask_cors
-pip install openai
+pip install -r requirements.txt
 ```
 
 
