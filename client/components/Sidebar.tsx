@@ -1,6 +1,24 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 function SideBar() {
+
+    //Connection test, initial env setup
+    const [message, setMessage] = useState("Testing connection");
+    const [array, setArray] = useState([]);
+
+    useEffect(() => {
+        fetch("http://localhost:8080/api/test")
+            .then((response) => response.json())
+            .then((data) => {
+                setMessage(data.message);
+                setArray(data.array);
+            })
+            .catch((error) => {
+                console.error('API error:', error)
+                setMessage('API is offline')
+            });
+    }, []);
+
     const [formData, setFormData] = useState({
         roomType: '',
         cabinetryStyle: '',
@@ -47,27 +65,27 @@ function SideBar() {
                                 </label>
 
                                 <input
-                                type="radio"
-                                id="roomType_LivingRoom"
-                                name="roomType"
-                                value="Living Room"
-                                onChange={handleChange}
-                                className="hidden"
-                            />
-                            <label htmlFor="roomType_LivingRoom" className="flex flex-col p-2 border-2 border-gray-700 cursor-pointer m-1 rounded rounded hover:bg-gray-600">
-                            <span className="text-xs font-semibold uppercase">Living Room</span>
-                            </label>
-                            <input
-                                type="radio"
-                                id="roomType_Bath"
-                                name="roomType"
-                                value="Bath"
-                                onChange={handleChange}
-                                className="hidden"
-                            />
-                            <label htmlFor="roomType_Bath" className="flex flex-col p-2 border-2 border-gray-700 cursor-pointer m-1 rounded rounded hover:bg-gray-600">
-                            <span className="text-xs font-semibold uppercase">Bath</span>
-                            </label> 
+                                    type="radio"
+                                    id="roomType_LivingRoom"
+                                    name="roomType"
+                                    value="Living Room"
+                                    onChange={handleChange}
+                                    className="hidden"
+                                />
+                                <label htmlFor="roomType_LivingRoom" className="flex flex-col p-2 border-2 border-gray-700 cursor-pointer m-1 rounded rounded hover:bg-gray-600">
+                                    <span className="text-xs font-semibold uppercase">Living Room</span>
+                                </label>
+                                <input
+                                    type="radio"
+                                    id="roomType_Bath"
+                                    name="roomType"
+                                    value="Bath"
+                                    onChange={handleChange}
+                                    className="hidden"
+                                />
+                                <label htmlFor="roomType_Bath" className="flex flex-col p-2 border-2 border-gray-700 cursor-pointer m-1 rounded rounded hover:bg-gray-600">
+                                    <span className="text-xs font-semibold uppercase">Bath</span>
+                                </label>
                             </div>
                         </div>
                         <div className="mb-4">
