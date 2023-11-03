@@ -1,17 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
-function SideBar() {
+function Sidebar(props: any) {
 
-    //Connection test, initial env setup
-    const [message, setMessage] = useState("Testing connection");
-    const [array, setArray] = useState([]);
+    const [ping_message, setMessage] = useState("Testing connection");
 
     useEffect(() => {
-        fetch("http://localhost:8080/api/test")
+        fetch("http://localhost:8080/api/ping")
             .then((response) => response.json())
             .then((data) => {
                 setMessage(data.message);
-                setArray(data.array);
             })
             .catch((error) => {
                 console.error('API error:', error)
@@ -19,13 +16,14 @@ function SideBar() {
             });
     }, []);
 
+
     const [formData, setFormData] = useState({
-        roomType: '',
-        cabinetryStyle: '',
-        cabinetColor: '',
-        hardwareFinish: '',
-        style: '',
-        numberOfImages: '',
+        roomType: 'Kitchen',
+        cabinetryStyle: 'Flat slab doors',
+        cabinetColor: 'Maple',
+        hardwareFinish: 'Satin nickel',
+        style: 'Standard',
+        numberOfImages: '2',
     });
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -33,16 +31,42 @@ function SideBar() {
         setFormData({ ...formData, [name]: value });
     };
 
-    const handleSubmit = (event: React.FormEvent) => {
+    const handleSubmit = async (event: React.FormEvent) => {
         event.preventDefault();
-        console.log(formData); 
+    
+        try {
+            const response = await fetch('http://localhost:8080/api/generate_test', {
+                method: 'POST',
+                body: JSON.stringify(formData),
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            });
+    
+            if (response.ok) {
+                const responseData = await response.json();
+    
+                if (responseData.combinedValues) {
+                    const combinedValues = responseData.combinedValues;
+                    props.updateResponse(combinedValues);
+                    console.log('Combined Values:', combinedValues);
+                } else {
+                    console.error('API response does not contain combinedValues');
+                }
+            } else {
+                console.error('API error:', response.statusText);
+            }
+        } catch (error) {
+            console.error('API error:', error);
+        }
     };
+    
 
     return (
         <aside className="bg-slate-800 rounded-xl shadow p-4 m-2 sm:w-fit sm:max-w-96">
             <div className="">
                 <h2>Your Space</h2>
-                <p>Testing connection</p>
+                <span className="inline">{ping_message}</span>
                 <div className="form">
                     <form onSubmit={handleSubmit}>
                         <div className="">
@@ -55,6 +79,7 @@ function SideBar() {
                                     value="Kitchen"
                                     onChange={handleChange}
                                     className="hidden"
+                                    checked={formData.roomType === 'Kitchen'}
                                 />
                                 <label
                                     htmlFor="roomType_Kitchen"
@@ -97,6 +122,7 @@ function SideBar() {
                                     value="Flat slab doors"
                                     onChange={handleChange}
                                     className="hidden"
+                                    checked={formData.cabinetryStyle === 'Flat slab doors'}
                                 />
                                 <label
                                     htmlFor="cabinetryStyle_FlatSlabDoors"
@@ -130,6 +156,7 @@ function SideBar() {
                                     value="Maple"
                                     onChange={handleChange}
                                     className="hidden"
+                                    checked={formData.cabinetColor === 'Maple'}
                                 />
                                 <label
                                     htmlFor="cabinetColor_Maple"
@@ -205,6 +232,7 @@ function SideBar() {
                                     value="Satin Nickel"
                                     onChange={handleChange}
                                     className="hidden"
+                                    checked={formData.hardwareFinish === 'Satin nickel'}
                                 />
                                 <label
                                     htmlFor="hardwareFinish_SatinNickel"
@@ -238,6 +266,7 @@ function SideBar() {
                                     value="Standard"
                                     onChange={handleChange}
                                     className="hidden"
+                                    checked={formData.style === 'Standard'}
                                 />
                                 <label
                                     htmlFor="style_Standard"
@@ -284,7 +313,10 @@ function SideBar() {
                                 name="numberOfImages"
                                 value={formData.numberOfImages}
                                 onChange={handleChange}
-                                className="border rounded p-2"
+                                className="mt-1 block w-full px-3 py-2 bg-white border border-slate-300 rounded-md text-xl shadow-sm placeholder-slate-400
+                                focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500
+                                disabled:bg-slate-50 text-slate-900 disabled:border-slate-200 disabled:shadow-none
+                                invalid:border-pink-500"
                             />
                         </div>
                         <button
@@ -300,4 +332,4 @@ function SideBar() {
     );
 }
 
-export default SideBar;
+export default Sidebar;
