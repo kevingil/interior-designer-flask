@@ -5,7 +5,7 @@ export default function Document() {
     <Html lang="en" className="dark text-white">
       <Head />
       <title>Interior Designer.AI</title>
-      <body className='bg-slate-900'>
+      <body>
         <Main/>
         <NextScript />
       </body>

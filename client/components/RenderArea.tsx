@@ -2,8 +2,8 @@ import React from 'react';
 
 function RenderArea(props: any) {
   return (
-    <div className="bg-slate-800 rounded-xl shadow p-4 m-2 sm:w-full">
-      <h2>DallE Render</h2>
+    <div className="bg-gray-800/50 backdrop-blur-sm rounded-xl shadow p-4 w-full">
+      <h2>Render</h2>
 
       <div className="flex justify-center items-center h-full">
         {props.response ? (

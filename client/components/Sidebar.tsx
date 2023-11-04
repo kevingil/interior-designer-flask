@@ -63,13 +63,13 @@ function Sidebar(props: any) {
     
 
     return (
-        <aside className="bg-slate-800 rounded-xl shadow p-4 m-2 sm:w-fit sm:max-w-96">
+        <aside className="bg-gray-800/50 backdrop-blur-sm rounded-xl shadow p-4 sm:max-w-[300px]">
             <div className="">
-                <h2>Your Space</h2>
+                <h2>Your Room</h2>
                 <span className="inline">{ping_message}</span>
                 <div className="form">
-                    <form onSubmit={handleSubmit}>
-                        <div className="">
+                    <form onSubmit={handleSubmit} className=''>
+                        <div>
                             <label className="block  mb-2">Room Type</label>
                             <div className="flex flex-row flex-wrap space-x-2">
                                 <input
@@ -313,9 +313,9 @@ function Sidebar(props: any) {
                                 name="numberOfImages"
                                 value={formData.numberOfImages}
                                 onChange={handleChange}
-                                className="mt-1 block w-full px-3 py-2 bg-white border border-slate-300 rounded-md text-xl shadow-sm placeholder-slate-400
+                                className="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md text-xl shadow-sm placeholder-gray-400
                                 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500
-                                disabled:bg-slate-50 text-slate-900 disabled:border-slate-200 disabled:shadow-none
+                                disabled:bg-gray-50 text-gray-900 disabled:border-gray-200 disabled:shadow-none
                                 invalid:border-pink-500"
                             />
                         </div>

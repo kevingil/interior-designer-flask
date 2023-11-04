@@ -11,9 +11,9 @@ function Index() {
   };
 
   return (
-    <div className="h-full px-2">
+    <div className="w-full h-full p-2 sm:px-4">
       <Navigation /> 
-      <div className="flex flex-col-reverse sm:flex-row auto-cols-max">
+      <div className="flex flex-col-reverse sm:flex-row gap-2">
         <Sidebar updateResponse={updateResponse} />
         <RenderArea response={response} />
       </div>

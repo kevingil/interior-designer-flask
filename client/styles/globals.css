@@ -4,11 +4,14 @@
 
 
 body {
-	height:100vh;
+	/*background-image: radial-gradient( circle 369px at -2.9% 12.9%,  rgba(247,234,163,1) 0%, rgba(236,180,238,0.56) 46.4%, rgba(163,203,247,1) 100.7% );*/
+	background-image: radial-gradient( circle farthest-corner at 10% 20%,  rgba(109,112,204,1) 0%, rgba(63,166,196,1) 90% );
+	min-height: 100vh;
 }
 
 input:checked + label {
 	border-color: transparent;
-	background-color: #4b5563;
-	box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+	background-image: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+		box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+		border: 0;
 }
