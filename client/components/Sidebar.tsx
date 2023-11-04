@@ -12,7 +12,7 @@ function Sidebar(props: any) {
             })
             .catch((error) => {
                 console.error('API error:', error)
-                setMessage('API is offline')
+                setMessage('Server Offline')
             });
     }, []);
 
@@ -46,10 +46,13 @@ function Sidebar(props: any) {
             if (response.ok) {
                 const responseData = await response.json();
     
-                if (responseData.combinedValues) {
-                    const combinedValues = responseData.combinedValues;
-                    props.updateResponse(combinedValues);
-                    console.log('Combined Values:', combinedValues);
+                if (responseData.prompt) {
+                    const prompt = responseData.prompt;
+                    const img_qty = responseData.qty;
+                    const test_api_res = "Prompt: " + prompt + ", Images: " + img_qty;
+                    props.updateResponse(test_api_res);
+                    console.log('Prompt:', prompt);
+                    console.log('Img qty:', img_qty);
                 } else {
                     console.error('API response does not contain combinedValues');
                 }
@@ -63,10 +66,9 @@ function Sidebar(props: any) {
     
 
     return (
-        <aside className="bg-gray-800/50 backdrop-blur-sm rounded-xl shadow p-4 sm:max-w-[300px]">
+        <aside className="bg-stone-900/90 backdrop-blur-sm rounded-xl shadow p-4 sm:max-w-[300px]">
             <div className="">
-                <h2>Your Room</h2>
-                <span className="inline">{ping_message}</span>
+                <p className='text-xl pb-2'>Generate <span className="inline text-sm">({ping_message})</span></p>
                 <div className="form">
                     <form onSubmit={handleSubmit} className=''>
                         <div>
@@ -140,7 +142,7 @@ function Sidebar(props: any) {
                                 />
                                 <label
                                     htmlFor="cabinetryStyle_ShakerDoors"
-                                    className="flex flex-col p-2 border-2 border-gray-700 cursor-pointer m-1 rounded rounded hover-bg-gray-600"
+                                    className="flex flex-col p-2 border-2 border-gray-700 cursor-pointer m-1 rounded rounded hover:bg-gray-600"
                                 >
                                     <span className="text-xs font-semibold uppercase">Shaker doors</span>
                                 </label>
@@ -160,7 +162,7 @@ function Sidebar(props: any) {
                                 />
                                 <label
                                     htmlFor="cabinetColor_Maple"
-                                    className="flex flex-col p-2 border-2 border-gray-700 cursor-pointer m-1 rounded rounded hover-bg-gray-600"
+                                    className="flex flex-col p-2 border-2 border-gray-700 cursor-pointer m-1 rounded rounded hover:bg-gray-600"
                                 >
                                     <span className="text-xs font-semibold uppercase">Maple</span>
                                 </label>
@@ -174,7 +176,7 @@ function Sidebar(props: any) {
                                 />
                                 <label
                                     htmlFor="cabinetColor_DarkGray"
-                                    className="flex flex-col p-2 border-2 border-gray-700 cursor-pointer m-1 rounded rounded hover-bg-gray-600"
+                                    className="flex flex-col p-2 border-2 border-gray-700 cursor-pointer m-1 rounded rounded hover:bg-gray-600"
                                 >
                                     <span className="text-xs font-semibold uppercase">Dark Gray</span>
                                 </label>
@@ -188,7 +190,7 @@ function Sidebar(props: any) {
                                 />
                                 <label
                                     htmlFor="cabinetColor_White"
-                                    className="flex flex-col p-2 border-2 border-gray-700 cursor-pointer m-1 rounded rounded hover-bg-gray-600"
+                                    className="flex flex-col p-2 border-2 border-gray-700 cursor-pointer m-1 rounded rounded hover:bg-gray-600"
                                 >
                                     <span className="text-xs font-semibold uppercase">White</span>
                                 </label>
@@ -207,7 +209,7 @@ function Sidebar(props: any) {
                                 />
                                 <label
                                     htmlFor="hardwareFinish_PolishedChrome"
-                                    className="flex flex-col p-2 border-2 border-gray-700 cursor-pointer m-1 rounded rounded hover-bg-gray-600"
+                                    className="flex flex-col p-2 border-2 border-gray-700 cursor-pointer m-1 rounded rounded hover:bg-gray-600"
                                 >
                                     <span className="text-xs font-semibold uppercase">Polished Chrome</span>
                                 </label>
@@ -221,7 +223,7 @@ function Sidebar(props: any) {
                                 />
                                 <label
                                     htmlFor="hardwareFinish_PolishedBrass"
-                                    className="flex flex-col p-2 border-2 border-gray-700 cursor-pointer m-1 rounded rounded hover-bg-gray-600"
+                                    className="flex flex-col p-2 border-2 border-gray-700 cursor-pointer m-1 rounded rounded hover:bg-gray-600"
                                 >
                                     <span className="text-xs font-semibold uppercase">Polished Brass</span>
                                 </label>
@@ -236,7 +238,7 @@ function Sidebar(props: any) {
                                 />
                                 <label
                                     htmlFor="hardwareFinish_SatinNickel"
-                                    className="flex flex-col p-2 border-2 border-gray-700 cursor-pointer m-1 rounded rounded hover-bg-gray-600"
+                                    className="flex flex-col p-2 border-2 border-gray-700 cursor-pointer m-1 rounded rounded hover:bg-gray-600"
                                 >
                                     <span className="text-xs font-semibold uppercase">Satin Nickel</span>
                                 </label>
@@ -250,7 +252,7 @@ function Sidebar(props: any) {
                                 />
                                 <label
                                     htmlFor="hardwareFinish_OilRubbedBronze"
-                                    className="flex flex-col p-2 border-2 border-gray-700 cursor-pointer m-1 rounded rounded hover-bg-gray-600"
+                                    className="flex flex-col p-2 border-2 border-gray-700 cursor-pointer m-1 rounded rounded hover:bg-gray-600"
                                 >
                                     <span className="text-xs font-semibold uppercase">Oil Rubbed Bronze</span>
                                 </label>
@@ -270,7 +272,7 @@ function Sidebar(props: any) {
                                 />
                                 <label
                                     htmlFor="style_Standard"
-                                    className="flex flex-col p-2 border-2 border-gray-700 cursor-pointer m-1 rounded rounded hover-bg-gray-600"
+                                    className="flex flex-col p-2 border-2 border-gray-700 cursor-pointer m-1 rounded rounded hover:bg-gray-600"
                                 >
                                     <span className="text-xs font-semibold uppercase">Standard</span>
                                 </label>
@@ -284,7 +286,7 @@ function Sidebar(props: any) {
                                 />
                                 <label
                                     htmlFor="style_Minimalist"
-                                    className="flex flex-col p-2 border-2 border-gray-700 cursor-pointer m-1 rounded rounded hover-bg-gray-600"
+                                    className="flex flex-col p-2 border-2 border-gray-700 cursor-pointer m-1 rounded rounded hover:bg-gray-600"
                                 >
                                     <span className="text-xs font-semibold uppercase">Minimalist</span>
                                 </label>
@@ -298,7 +300,7 @@ function Sidebar(props: any) {
                                 />
                                 <label
                                     htmlFor="style_Classic"
-                                    className="flex flex-col p-2 border-2 border-gray-700 cursor-pointer m-1 rounded rounded hover-bg-gray-600"
+                                    className="flex flex-col p-2 border-2 border-gray-700 cursor-pointer m-1 rounded rounded hover:bg-gray-600"
                                 >
                                     <span className="text-xs font-semibold uppercase">Classic</span>
                                 </label>
@@ -320,8 +322,9 @@ function Sidebar(props: any) {
                             />
                         </div>
                         <button
+                         id="submit_request"
                             type="submit"
-                            className="w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-700"
+                            className="w-full bg-blue-500 text-white p-2 rounded"
                         >
                             Generate
                         </button>

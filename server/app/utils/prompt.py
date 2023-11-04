@@ -8,10 +8,12 @@ def generate_prompt(req):
     style = req.get('style')
     number_of_images = req.get('numberOfImages')
 
-    combined_values = f"{room_type} {cabinetry_style} {cabinet_color} {hardware_finish} {style} {number_of_images}"
+    combined_values = f"A sunlit {room_type} with {cabinet_color} {cabinetry_style} and {hardware_finish} cabinet hardware in a {style} design style"
+    qty = f"{number_of_images}"
 
     response = {
-        'combinedValues': combined_values,
+        'prompt': combined_values.lower(),
+        'qty': qty
     }
 
     return response

@@ -11,7 +11,17 @@ body {
 
 input:checked + label {
 	border-color: transparent;
-	background-image: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+	background:#6366f1;
 		box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
 		border: 0;
 }
+
+#submit_request{
+	background-image: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+#submit_request:hover{
+	background-image: linear-gradient(135deg, #4f63bb 0%, #60348b 100%);
+}
+
+
