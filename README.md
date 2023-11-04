@@ -1,7 +1,7 @@
 # Interior Designer AI
 >Generate interior design renders with DallE
 
-![9RAdS.png](https://s6.imgcdn.dev/9RAdS.png)
+![9RAdS.png](https://cdn.kevingil.com/thumbnail_image.png)
 
 
 
