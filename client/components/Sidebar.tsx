@@ -49,10 +49,11 @@ function Sidebar(props: any) {
                 if (responseData.prompt) {
                     const prompt = responseData.prompt;
                     const img_qty = responseData.qty;
-                    const test_api_res = "Prompt: " + prompt + ", Images: " + img_qty;
-                    props.updateResponse(test_api_res);
+                    const images = responseData.images;
+                    props.updateResponse(responseData);
                     console.log('Prompt:', prompt);
                     console.log('Img qty:', img_qty);
+                    console.log('Images:', images);
                 } else {
                     console.error('API response does not contain combinedValues');
                 }
