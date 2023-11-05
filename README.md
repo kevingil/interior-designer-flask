@@ -1,32 +1,31 @@
 # Interior Designer AI
 >Generate interior design renders with DallE
 
-![9RAdS.png](https://cdn.kevingil.com/thumbnail_image.png)
+![9RAdS.png](https://cdn.kevingil.com/screenshot_interior_designer.png)
 
 
 
-## Setup
+## Develop
+
+Setup API Key
 
 ```sh
-from client/
+#Setup .env in server/app/routes/
+OPENAI_API_KEY=your_key
+```
+
+Run
+
+```sh
+#from client/
 npm install
-
-from server/ 
-pip install -r requirements.txt
-```
-
-
-## Run client
-
-```sh
 npm run dev
-```
 
-
-## Run server
-```sh
+#from server/ 
+pip install -r requirements.txt
 python server.py
 ```
+
 
 ## Build with Docker
 ```sh
