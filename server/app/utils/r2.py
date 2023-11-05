@@ -3,8 +3,17 @@ import requests
 import io
 import botocore
 import uuid  
+import os
+from dotenv import load_dotenv
 
-def upload_to_r2(account_id, access_key_id, secret_access_key, bucket_name, prefix, images):
+def upload_to_r2(prefix, images):
+    
+    load_dotenv()
+    account_id = os.getenv("CLOUDFLARE_ACCOUNT_ID")
+    access_key_id = os.getenv("R2_ACCESS_KEY_ID")
+    secret_access_key = os.getenv("R2_SECRET_ACCESS_KEY")
+    bucket_name = 'cdn'
+    
     
     try:
         s3 = boto3.client(

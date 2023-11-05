@@ -7,18 +7,29 @@ def generate_prompt(req):
     hardware_finish = req.get('hardwareFinish').lower()
     style = req.get('style').lower()
     number_of_images = req.get('numberOfImages')
+    
+    #Additional
+    addon_prompt = ''
+    if room_type == 'kitchen':
+        addon_prompt = f'Modern marble countertops, Embedded appliances.  Kitchen island, large window over sink.  With {cabinet_color} flat surface cabinet doors and {hardware_finish} cabinet hardware.'
+    if room_type == 'living room':
+        addon_prompt = ''
+    if room_type == 'bath':
+        addon_prompt = 'Large mirror'
 
-    combined_values = f"A sunlit {room_type} with all its furnishings, including {cabinet_color} flat surface cabinet doors and {hardware_finish} cabinet knobs and pulls in a {style} design style. Modern marble countertops, no lens distortion. Embedded appliances. Full kitchen island, large window over sink, open area. Wall to wall, wide angle view, 3 corners in view."
+    combined_values = f"A sunlit {room_type} in a {style} design style, {addon_prompt}"
     qty = int(number_of_images)
     try:
         qty = int(number_of_images)
     except ValueError:
         print("Invalid? Set to 1.")
         qty = 1
-
+        
+    print(room_type)
     response = {
         'prompt': combined_values,
-        'qty': qty
+        'qty': qty,
+        'room': room_type,
     }
 
     return response
