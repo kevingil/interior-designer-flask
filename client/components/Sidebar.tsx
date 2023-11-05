@@ -19,10 +19,9 @@ function Sidebar(props: any) {
 
     const [formData, setFormData] = useState({
         roomType: 'Kitchen',
-        cabinetryStyle: 'Flat slab doors',
         cabinetColor: 'Maple',
         hardwareFinish: 'Satin nickel',
-        style: 'Standard',
+        style: 'Regular',
         numberOfImages: '2',
     });
 
@@ -35,6 +34,7 @@ function Sidebar(props: any) {
         event.preventDefault();
     
         try {
+            props.setLoading(true);
             const response = await fetch('http://localhost:8080/api/generate_test', {
                 method: 'POST',
                 body: JSON.stringify(formData),
@@ -62,7 +62,9 @@ function Sidebar(props: any) {
             }
         } catch (error) {
             console.error('API error:', error);
-        }
+        } finally {
+            props.setLoading(false);
+          }
     };
     
 
@@ -112,40 +114,6 @@ function Sidebar(props: any) {
                                 />
                                 <label htmlFor="roomType_Bath" className="flex flex-col p-2 border-2 border-gray-700 cursor-pointer m-1 rounded rounded hover:bg-gray-600">
                                     <span className="text-xs font-semibold uppercase">Bath</span>
-                                </label>
-                            </div>
-                        </div>
-                        <div className="mb-4">
-                            <label className="block mb-2">Cabinetry Style</label>
-                            <div className="flex flex-row flex-wrap space-x-2">
-                                <input
-                                    type="radio"
-                                    id="cabinetryStyle_FlatSlabDoors"
-                                    name="cabinetryStyle"
-                                    value="Flat slab doors"
-                                    onChange={handleChange}
-                                    className="hidden"
-                                    checked={formData.cabinetryStyle === 'Flat slab doors'}
-                                />
-                                <label
-                                    htmlFor="cabinetryStyle_FlatSlabDoors"
-                                    className="flex flex-col p-2 border-2 border-gray-700 cursor-pointer m-1 rounded rounded hover:bg-gray-600"
-                                >
-                                    <span className="text-xs font-semibold uppercase">Flat slab doors</span>
-                                </label>
-                                <input
-                                    type="radio"
-                                    id="cabinetryStyle_ShakerDoors"
-                                    name="cabinetryStyle"
-                                    value="Shaker doors"
-                                    onChange={handleChange}
-                                    className="hidden"
-                                />
-                                <label
-                                    htmlFor="cabinetryStyle_ShakerDoors"
-                                    className="flex flex-col p-2 border-2 border-gray-700 cursor-pointer m-1 rounded rounded hover:bg-gray-600"
-                                >
-                                    <span className="text-xs font-semibold uppercase">Shaker doors</span>
                                 </label>
                             </div>
                         </div>
@@ -264,18 +232,18 @@ function Sidebar(props: any) {
                             <div className="flex flex-row flex-wrap space-x-2">
                                 <input
                                     type="radio"
-                                    id="style_Standard"
+                                    id="style_Regular"
                                     name="style"
-                                    value="Standard"
+                                    value="Regular"
                                     onChange={handleChange}
                                     className="hidden"
-                                    checked={formData.style === 'Standard'}
+                                    checked={formData.style === 'Regular'}
                                 />
                                 <label
-                                    htmlFor="style_Standard"
+                                    htmlFor="style_Regular"
                                     className="flex flex-col p-2 border-2 border-gray-700 cursor-pointer m-1 rounded rounded hover:bg-gray-600"
                                 >
-                                    <span className="text-xs font-semibold uppercase">Standard</span>
+                                    <span className="text-xs font-semibold uppercase">Regular</span>
                                 </label>
                                 <input
                                     type="radio"

@@ -3,13 +3,12 @@
 def generate_prompt(req):
     
     room_type = req.get('roomType').lower()
-    cabinetry_style = req.get('cabinetryStyle').lower()
     cabinet_color = req.get('cabinetColor').lower()
     hardware_finish = req.get('hardwareFinish').lower()
     style = req.get('style').lower()
     number_of_images = req.get('numberOfImages')
 
-    combined_values = f"Corner angle, full view of a sunlit {room_type} with {cabinet_color} {cabinetry_style} and {hardware_finish} cabinet hardware in a {style} design style"
+    combined_values = f"A sunlit {room_type} with all its furnishings, including {cabinet_color} flat surface cabinet doors and {hardware_finish} cabinet knobs and pulls in a {style} design style. Modern marble countertops, no lens distortion. Embedded appliances. Full kitchen island, large window over sink, open area. Wall to wall, wide angle view, 3 corners in view."
     qty = int(number_of_images)
     try:
         qty = int(number_of_images)

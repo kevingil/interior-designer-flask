@@ -1,4 +1,6 @@
 import { useEffect, useState } from 'react';
+import ModalImage from "react-modal-image";
+
 
 function Showcase() {
   const [latestImages, setLatestImages] = useState([]);
@@ -20,7 +22,7 @@ function Showcase() {
   return (
     <div className="bg-stone-900/90 backdrop-blur-sm rounded-xl shadow p-4 w-full mt-2">
       <h2>Showcase</h2>
-      <div className='flex sm:flex-row flex-col'>
+      <div className='flex flex-wrap sm:flex-row flex-col gap-4'>
         {isLoading ? ( 
           <>
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" className="fill-gray-500 m-6 h-[2rem]">
@@ -32,8 +34,7 @@ function Showcase() {
             <img
               key={index}
               src={image[4]}
-              alt={`Image ${index + 1}`}
-              className="max-w-full sm:max-h-[200px] m-2 rounded"
+              className="max-w-full sm:max-h-[300px] rounded-xl" 
             />
           ))
         )}
