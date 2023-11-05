@@ -26,3 +26,4 @@ go.work
 
 .db
 server/gallery.db
+server/app/utils/prompt.py

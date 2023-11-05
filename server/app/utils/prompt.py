@@ -11,11 +11,11 @@ def generate_prompt(req):
     #Additional
     addon_prompt = ''
     if room_type == 'kitchen':
-        addon_prompt = f'Modern marble countertops, Embedded appliances.  Kitchen island, large window over sink.  With {cabinet_color} flat surface cabinet doors and {hardware_finish} cabinet hardware.'
+        addon_prompt = f'Modern marble countertops, Embedded appliances.  Kitchen island, large window over sink.  With {cabinet_color} flat surface cabinet doors and {hardware_finish} cabinet hardware. Full kitchen interior design render'
     if room_type == 'living room':
-        addon_prompt = ''
+        addon_prompt = f' with couch, TV, {cabinet_color} media console and big window. Full living room interior design render.'
     if room_type == 'bath':
-        addon_prompt = 'Large mirror'
+        addon_prompt = f'Large mirror and windows. {cabinet_color} vanity cabinets Full bathroom interior design render.'
 
     combined_values = f"A sunlit {room_type} in a {style} design style, {addon_prompt}"
     qty = int(number_of_images)

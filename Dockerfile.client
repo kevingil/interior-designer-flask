@@ -1,13 +1,15 @@
-FROM python:3.8
+FROM node:14
 
 WORKDIR /app
 
-COPY ./server /app
+COPY package*.json ./
 
-RUN pip install -r requirements.txt
+RUN npm install
 
-EXPOSE 5000
+COPY . .
 
-ENV FLASK_APP=server.py
+RUN npm run build
 
-CMD ["flask", "run", "--host", "0.0.0.0"]
+EXPOSE 3000
+
+CMD ["npm", "start"]

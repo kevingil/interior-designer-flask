@@ -16,19 +16,19 @@ def generate_image_test(prompt, qty, size, room_name):
     try:
         responses = []
         
-        image_filename = f'{room_name}.png'
-        mask_filename = f'{room_name}-mask.png'
-        image_directory = os.path.join(os.getcwd(), "app", "images", image_filename)
-        mask_directory = os.path.join(os.getcwd(), "app", "images", mask_filename)
-        print(image_directory)
-        print(mask_directory)
+        #image_filename = f'{room_name}.png'
+        #mask_filename = f'{room_name}-mask.png'
+        #image_directory = os.path.join(os.getcwd(), "app", "images", image_filename)
+        #mask_directory = os.path.join(os.getcwd(), "app", "images", mask_filename)
+        #print(image_directory)
+        #print(mask_directory)
 
         for _ in range(qty):
 
-            response = openai.Image.create_edit(
+            response = openai.Image.create(
                 prompt=prompt,
-                image=open(image_directory, "rb"),
-                mask=open(mask_directory, "rb"),
+                #image=open(image_directory, "rb"),
+                #mask=open(mask_directory, "rb"),
                 n=qty,
                 size=size
             )

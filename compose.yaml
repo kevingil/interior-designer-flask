@@ -1,19 +1,22 @@
 version: '3'
-services:
-  server:
-    build:
-      context: .
-      dockerfile: Dockerfile.server
-    ports:
-      - "5000:5000"
 
-  client:
+services:
+  id-react:
     build:
-      context: .
-      dockerfile: Dockerfile.client
+      context: ./client
     ports:
       - "3000:3000"
-    depends_on:
-      - server
-    links:
-      - server
+    networks:
+      - webapp_network
+
+  id-flask:
+    build:
+      context: ./server
+    ports:
+      - "5000:5000"
+    networks:
+      - webapp_network
+
+networks:
+  webapp_network:
+    driver: bridge
