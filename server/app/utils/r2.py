@@ -2,7 +2,7 @@ import boto3
 import requests
 import io
 import botocore
-import uuid  # Import the uuid module
+import uuid  
 
 def upload_to_r2(account_id, access_key_id, secret_access_key, bucket_name, prefix, images):
     
@@ -18,7 +18,7 @@ def upload_to_r2(account_id, access_key_id, secret_access_key, bucket_name, pref
         uploaded_image_urls = []
 
         for image_url in images:
-            # Generate a random key using uuid
+
             key = f"{prefix}{str(uuid.uuid4())}"
             
             try:

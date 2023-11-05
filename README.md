@@ -7,11 +7,17 @@
 
 ## Develop
 
-Setup API Key
+This project uses OpenAI to generate renders and Cloudflare R2 storage. You need to setup your API keys.
+
+Setup API Keys
 
 ```sh
 #Setup .env in server/app/routes/
 OPENAI_API_KEY=your_key
+CLOUDFLARE_R2_TOKEN=your_token
+R2_ACCESS_KEY_ID=your_id
+R2_SECRET_ACCESS_KEY=your_key
+CLOUDFLARE_ACCOUNT_ID=your_id
 ```
 
 Run
