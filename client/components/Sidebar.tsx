@@ -2,10 +2,18 @@ import React, { useState, useEffect } from 'react';
 
 function Sidebar(props: any) {
 
+    let api_ping_url = '', string;
+
+    if(process.env.NODE_ENV === 'development'){
+        api_ping_url = "http://localhost:8080/api/ping"
+    } else {
+        api_ping_url = "https://idai-api.kevingil.com/api/ping"
+    }
+
     const [ping_message, setMessage] = useState("Testing connection");
 
     useEffect(() => {
-        fetch("http://localhost:8080/api/ping")
+        fetch(api_ping_url)
             .then((response) => response.json())
             .then((data) => {
                 setMessage(data.message);
