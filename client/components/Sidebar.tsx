@@ -7,7 +7,7 @@ function Sidebar(props: any) {
     if(process.env.NODE_ENV === 'development'){
         api_ping_url = "http://localhost:8080/api/ping"
     } else {
-        api_ping_url = "https://idai-api.kevingil.com/api/ping"
+        api_ping_url = "http://147.182.233.135:5000/api/ping"
     }
 
     const [ping_message, setMessage] = useState("Testing connection");
@@ -43,7 +43,7 @@ function Sidebar(props: any) {
     
         try {
             props.setLoading(true);
-            const response = await fetch('http://localhost:8080/api/generate_test', {
+            const response = await fetch('http://147.182.233.135:5000/api/generate_test', {
                 method: 'POST',
                 body: JSON.stringify(formData),
                 headers: {
