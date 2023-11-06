@@ -1,9 +1,6 @@
 from flask import Blueprint, request, jsonify
 from flask_cors import CORS
-import os
-from dotenv import load_dotenv
 from ..utils.prompt import generate_prompt
-from ..utils.generate_image import generate_image
 from ..utils.generate_image_test import generate_image_test
 from ..utils.r2 import upload_to_r2
 from ..utils.gallery import *
