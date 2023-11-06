@@ -1,22 +1,16 @@
-version: '3'
+version: '3.8'
 
 services:
-  id-react:
+  react-app:
     build:
-      context: ./client
+      context: .
+      dockerfile: Dockerfile.client
     ports:
       - "3000:3000"
-    networks:
-      - webapp_network
 
-  id-flask:
+  flask-app:
     build:
-      context: ./server
+      context: .
+      dockerfile: Dockerfile.server
     ports:
       - "5000:5000"
-    networks:
-      - webapp_network
-
-networks:
-  webapp_network:
-    driver: bridge
