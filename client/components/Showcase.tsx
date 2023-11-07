@@ -14,16 +14,20 @@ function Showcase() {
 
   useEffect(() => {
     async function fetchLatestImages() {
-      const response = await fetch(api_gallery_latest_url);
-      if (response.ok) {
-        const data = await response.json();
-        setLatestImages(data);
-        setIsLoading(false);
+      try {
+        const response = await fetch(api_gallery_latest_url);
+          const data = await response.json();
+          setLatestImages(data);
+          setIsLoading(false);
+        
+      } catch (error) {
+        console.error("Error retreiving images, server might be offline:", error);
       }
     }
-
+  
     fetchLatestImages();
   }, []);
+  
 
   return (
     <div className="bg-stone-900/90 backdrop-blur-sm rounded-xl shadow p-4 w-full mt-2">
