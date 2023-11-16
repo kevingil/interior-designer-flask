@@ -2,7 +2,7 @@
 
 const Footer = () => {
     return (
-        <nav className="rounded mx-auto max-w-[800px]">
+        <nav className="rounded mx-auto max-w-[850px] px-4">
             <div className="h-36 mt-6 flex flex-row justify-between items-center">
                 <div className="text-2xl font-semibold ">
                     <a href="https://github.com/kevingil/interior-designer">Github</a>
