@@ -1,8 +1,7 @@
 # Interior Designer AI
 >Generate interior design renders with DallE
 
-![9RAdS.png](https://cdn.kevingil.com/screenshot_interior_designer.png)
-
+![IDAI.png](https://cdn.kevingil.com/idai111523.png)
 
 
 ## Develop
@@ -20,6 +19,7 @@ R2_SECRET_ACCESS_KEY=your_key
 CLOUDFLARE_ACCOUNT_ID=your_id
 ```
 
+
 Run
 
 ```sh
@@ -31,6 +31,8 @@ npm run dev
 pip install -r requirements.txt
 python server.py
 ```
+
+![IDAI-2.png](https://cdn.kevingil.com/idai111523-2.png)
 
 
 ## Build with Docker

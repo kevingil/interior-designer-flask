@@ -2,12 +2,15 @@ import React, { useState, useEffect } from 'react';
 
 function Sidebar(props: any) {
 
-    let api_ping_url = '', string;
+    let api_ping_url = '';
+    let api_generate_url = '';
 
     if(process.env.NODE_ENV === 'development'){
-        api_ping_url = "http://localhost:8080/api/ping"
+        api_ping_url = "http://localhost:5000/api/ping"
+        api_generate_url = "http://localhost:5000/api/generate_test"
     } else {
         api_ping_url = "http://147.182.233.135:5000/api/ping"
+        api_generate_url = "http://147.182.233.135:5000/api/generate_test"
     }
 
     const [ping_message, setMessage] = useState("Testing connection");
@@ -43,7 +46,7 @@ function Sidebar(props: any) {
     
         try {
             props.setLoading(true);
-            const response = await fetch('http://147.182.233.135:5000/api/generate_test', {
+            const response = await fetch(api_generate_url, {
                 method: 'POST',
                 body: JSON.stringify(formData),
                 headers: {
@@ -77,11 +80,12 @@ function Sidebar(props: any) {
     
 
     return (
-        <aside className="bg-stone-900/90 backdrop-blur-sm rounded-xl shadow p-4 sm:max-w-[300px]">
-            <div className="">
+        <aside className="">
+            <div className='bg-stone-900/90 backdrop-blur-sm rounded-xl shadow p-4 sm:max-w-[300px]'>
                 <p className='text-xl pb-2'>Generate <span className="inline text-sm">({ping_message})</span></p>
-                <div className="form">
+                <div>
                     <form onSubmit={handleSubmit} className=''>
+                        <div className="form overflow-hidden max-h-[500px]  overflow-y-scroll">
                         <div>
                             <label className="block  mb-2">Room Type</label>
                             <div className="flex flex-row flex-wrap space-x-2">
@@ -282,6 +286,7 @@ function Sidebar(props: any) {
                                     <span className="text-xs font-semibold uppercase">Classic</span>
                                 </label>
                             </div>
+                        </div>
                         </div>
                         <div className="mb-4">
                             <label className="block mb-2">

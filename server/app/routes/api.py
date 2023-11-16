@@ -20,7 +20,7 @@ def return_home():
 # /api/gallery_latest
 @api.route("/gallery_latest", methods=['GET'])
 def return_gallery_latest():
-    return get_latest_renders(12)
+    return get_latest_renders(16)
     
 # /api/generate_render_test
 @api.route("/generate_test", methods=['POST'])

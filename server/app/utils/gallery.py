@@ -17,7 +17,6 @@ def get_latest_renders(n):
 
     return latest_images
 
-import sqlite3
 
 def update_gallery(render_time, engine, image_urls):
     conn = sqlite3.connect('gallery.db')

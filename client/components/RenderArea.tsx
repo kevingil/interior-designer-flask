@@ -2,10 +2,10 @@ import React from 'react';
 
 function RenderArea(props: any) {
   return (
-    <div className="bg-stone-900/90 backdrop-blur-sm rounded-xl shadow p-4 grow">
+    <div className="bg-stone-900/90 backdrop-blur-sm rounded-xl shadow p-4 grow h-full">
       <p className='text-xl'>Image Render</p>
 
-      <div className="flex justify-center items-center h-full min-h-[200px]">
+      <div className="flex justify-center items-center h-full min-h-[350px]">
         {props.loading ? ( 
           <div className='w-full text-center'>
             <p>This might take up to 40 seconds...</p>
@@ -18,8 +18,7 @@ function RenderArea(props: any) {
         ) : (
           props.response ? (
             <div className="text-white text-lg">
-              <p className='p-4 mb-4'>Prompt: {props.response.prompt}</p>
-              <div className='flex flex-row flex-wrap gap-4 p-2'>
+              <div className='flex flex-row flex-wrap gap-4 p-6'>
                 {props.response.images && Array.isArray(props.response.images) && props.response.images.length > 0 ? (
                   props.response.images.map((image: string, index: number) => (
                     <img

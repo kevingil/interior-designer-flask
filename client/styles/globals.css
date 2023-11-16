@@ -3,10 +3,13 @@
 @tailwind utilities;
 
 
-body {
-	/*background-image: radial-gradient( circle 369px at -2.9% 12.9%,  rgba(247,234,163,1) 0%, rgba(236,180,238,0.56) 46.4%, rgba(163,203,247,1) 100.7% );*/
-	background-image: radial-gradient( circle farthest-corner at 10% 20%,  rgba(109,112,204,1) 0%, rgba(63,166,196,1) 90% );
-	min-height: 100vh;
+ html {
+	height: 100%;
+	width: 100%;
+}
+
+body, html {
+	background-color: #000000;
 }
 
 input:checked + label {
@@ -24,4 +27,48 @@ input:checked + label {
 	background-image: linear-gradient(135deg, #4f63bb 0%, #60348b 100%);
 }
 
+#home_create {
+    width: 200px;
+    font-size: 16px;
+    font-weight: 600;
+    color: #fff;
+    cursor: pointer;
+    margin: 20px;
+    height: 55px;
+    text-align:center;
+    border: none;
+    background-size: 300% 100%;
+	background-image: linear-gradient(to right, #667eea, #764ba2, #6B8DD6, #8E37D7);
+    box-shadow: 0 4px 15px 0 rgba(116, 79, 168, 0.75);
+    border-radius: 50px;
+    moz-transition: all .4s ease-in-out;
+    -o-transition: all .4s ease-in-out;
+    -webkit-transition: all .4s ease-in-out;
+    transition: all .4s ease-in-out;
+}
 
+
+
+#home_create:hover {
+    background-position: 100% 0;
+    moz-transition: all .4s ease-in-out;
+    -o-transition: all .4s ease-in-out;
+    -webkit-transition: all .4s ease-in-out;
+    transition: all .4s ease-in-out;
+}
+
+#home_create:focus {
+    outline: none;
+}
+
+
+.home_title {
+	background-image: linear-gradient(-20deg, #cdbaff 30%, #cbfdfb 100%);
+	text-shadow: 1px 1px 7px rgba(228, 228, 228, 0.25);
+	 background-size: 100%;
+	 background-repeat: repeat;
+	 -webkit-background-clip: text;
+	 -webkit-text-fill-color: transparent; 
+	 -moz-background-clip: text;
+	 -moz-text-fill-color: transparent;
+}
