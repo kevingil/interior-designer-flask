@@ -60,10 +60,10 @@ function Showcase() {
       <Transition
                   className=""
                   show={isShowing}
-                  enter="transition-all ease-in-out duration-500"
+                  enter="transition-all ease-in-out duration-300"
                   enterFrom="opacity-0 translate-y-6"
                   enterTo="opacity-100 translate-y-0"
-                  leave="transition-all ease-in-out duration-500"
+                  leave="transition-all ease-in-out duration-300"
                   leaveFrom="opacity-100"
                   leaveTo="opacity-0"
                 >
