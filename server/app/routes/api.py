@@ -20,11 +20,14 @@ def return_home():
 # /api/gallery_latest
 @api.route("/gallery_latest", methods=['GET'])
 def return_gallery_latest():
-    return get_latest_renders(16)
+    renders = get_latest_renders(16)
+    print(renders)
+    return renders
     
 # /api/generate_render_test
 @api.route("/generate_test", methods=['POST'])
 def generate_test():
+    print(request.get_json())
     data = request.get_json()
     
     if data is None:
@@ -34,10 +37,10 @@ def generate_test():
     
     response  = generate_prompt(data)
     render_size = "1024x1024"
-    render_test = generate_image_test(response['prompt'], response['qty'], render_size, response['room'])
+    render_test = generate_image_test(response['prompt'], response['num'], render_size)
     
     end_time = time.time()
-    render_time = end_time - start_time
+    render_time = round((end_time - start_time), 2)
     
     #If images where generated
     if 'images' in render_test:

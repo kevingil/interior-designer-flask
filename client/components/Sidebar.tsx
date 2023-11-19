@@ -1,11 +1,19 @@
 import React, { useState, useEffect } from 'react';
+import { Listbox, Transition } from '@headlessui/react';
+
+const space = ['Kitchen', 'Bath', 'Living Room', 'Dining Room'];
+const style = ['Contemporary', 'Modern', 'Minimalist', 'Rustic', 'Industrial', 'Scandanavian', 'Maximalist', 'Mid-century modern'];
+const color = ['Any', 'Glossy White', 'Matte Gray', 'Natural Maple', 'Walnut'];
+const accent = ['Any', 'Satin Nickel', 'Polished Brass', 'Chrome', 'Matte Black', 'Bronze'];
+const lighting = ['Sunlight', 'Ambient', 'Dark'];
+
 
 function Sidebar(props: any) {
 
     let api_ping_url = '';
     let api_generate_url = '';
 
-    if(process.env.NODE_ENV === 'development'){
+    if (process.env.NODE_ENV === 'development') {
         api_ping_url = "http://localhost:5000/api/ping"
         api_generate_url = "http://localhost:5000/api/generate_test"
     } else {
@@ -27,39 +35,43 @@ function Sidebar(props: any) {
             });
     }, []);
 
-
-    const [formData, setFormData] = useState({
-        roomType: 'Kitchen',
-        cabinetColor: 'Maple',
-        hardwareFinish: 'Satin nickel',
-        style: 'Regular',
-        numberOfImages: '2',
-    });
-
-    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        const { name, value } = event.target;
-        setFormData({ ...formData, [name]: value });
-    };
+    const [setspace, setSpaceSelect] = useState(space[0])
+    const [setstyle, setStyleSelect] = useState(style[0])
+    const [setcolor, setColorSelect] = useState(color[0])
+    const [setaccent, setAccentSelect] = useState(accent[0])
+    const [setlighting, setLightingSelect] = useState(lighting[0])
+    const [setnum, setNumSelect] = useState(1)
 
     const handleSubmit = async (event: React.FormEvent) => {
         event.preventDefault();
-    
+
         try {
+            const req = {
+                space: setspace,
+                style: setstyle,
+                color: setcolor,
+                accent: setaccent,
+                lighting: setlighting,
+                num: setnum,
+            };
             props.setLoading(true);
+            console.log(req);
             const response = await fetch(api_generate_url, {
                 method: 'POST',
-                body: JSON.stringify(formData),
+                body: JSON.stringify(req),
                 headers: {
                     'Content-Type': 'application/json',
                 },
-            });
-    
+            }
+
+            );
+
             if (response.ok) {
                 const responseData = await response.json();
-    
+
                 if (responseData.prompt) {
                     const prompt = responseData.prompt;
-                    const img_qty = responseData.qty;
+                    const img_qty = responseData.num;
                     const images = responseData.images;
                     props.updateResponse(responseData);
                     console.log('Prompt:', prompt);
@@ -70,223 +82,260 @@ function Sidebar(props: any) {
                 }
             } else {
                 console.error('API error:', response.statusText);
-            }
+            } 
         } catch (error) {
             console.error('API error:', error);
         } finally {
             props.setLoading(false);
-          }
+        }
     };
-    
+
 
     return (
         <aside className="">
-            <div className='bg-stone-900/90 backdrop-blur-sm rounded-xl shadow p-4 sm:max-w-[300px]'>
+            <div className='bg-stone-900/90 backdrop-blur-sm rounded-xl shadow p-4 sm:w-[250px]'>
                 <p className='text-xl pb-2'>Generate <span className="inline text-sm">({ping_message})</span></p>
                 <div>
                     <form onSubmit={handleSubmit} className=''>
-                        <div className="form overflow-hidden max-h-[500px]  overflow-y-scroll">
-                        <div>
-                            <label className="block  mb-2">Room Type</label>
-                            <div className="flex flex-row flex-wrap space-x-2">
-                                <input
-                                    type="radio"
-                                    id="roomType_Kitchen"
-                                    name="roomType"
-                                    value="Kitchen"
-                                    onChange={handleChange}
-                                    className="hidden"
-                                    checked={formData.roomType === 'Kitchen'}
-                                />
-                                <label
-                                    htmlFor="roomType_Kitchen"
-                                    className="flex flex-col p-2 border-2 border-gray-700 cursor-pointer m-1 rounded rounded hover:bg-gray-600"
-                                >
-                                    <span className="text-xs font-semibold uppercase">Kitchen</span>
-                                </label>
+                        <div className="form overflow-hidden">
+                            <div>
+                                <label className="block  mb-2">Space</label>
 
-                                <input
-                                    type="radio"
-                                    id="roomType_LivingRoom"
-                                    name="roomType"
-                                    value="Living Room"
-                                    onChange={handleChange}
-                                    className="hidden"
-                                />
-                                <label htmlFor="roomType_LivingRoom" className="flex flex-col p-2 border-2 border-gray-700 cursor-pointer m-1 rounded rounded hover:bg-gray-600">
-                                    <span className="text-xs font-semibold uppercase">Living Room</span>
-                                </label>
-                                <input
-                                    type="radio"
-                                    id="roomType_Bath"
-                                    name="roomType"
-                                    value="Bath"
-                                    onChange={handleChange}
-                                    className="hidden"
-                                />
-                                <label htmlFor="roomType_Bath" className="flex flex-col p-2 border-2 border-gray-700 cursor-pointer m-1 rounded rounded hover:bg-gray-600">
-                                    <span className="text-xs font-semibold uppercase">Bath</span>
-                                </label>
+                                <Listbox value={setspace} onChange={setSpaceSelect}>
+                                    <div className="relative mb-3">
+                                        <Listbox.Button className="relative w-full cursor-pointer rounded-lg bg-zinc-600/50 py-2 pl-3 pr-10 text-left shadow-md focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white/75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm">
+                                            <span className="block truncate">{setspace}</span>
+                                            <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
+
+                                            </span>
+                                        </Listbox.Button>
+                                        <Transition
+                                            leave="transition ease-in duration-100"
+                                            leaveFrom="opacity-100"
+                                            leaveTo="opacity-0"
+                                        >
+                                            <Listbox.Options className="absolute z-50 cursor-pointer mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black/5 focus:outline-none sm:text-sm">
+                                                {space.map((i) => (
+                                                    <Listbox.Option
+                                                        key={i}
+                                                        className={({ active }) =>
+                                                            `relative cursor-pointer select-none py-2 pl-10 pr-4 ${active ? 'bg-zinc-100 text-zinc-900' : 'text-gray-900'
+                                                            }`
+                                                        }
+                                                        value={i}
+                                                    >
+                                                        {({ selected }) => (
+                                                            <>
+                                                                <span
+                                                                    className={`block truncate ${selected ? 'font-medium' : 'font-normal'
+                                                                        }`}
+                                                                >
+                                                                    {i}
+                                                                </span>
+                                                                {selected ? (
+                                                                    <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-zinc-600">
+
+                                                                    </span>
+                                                                ) : null}
+                                                            </>
+                                                        )}
+                                                    </Listbox.Option>
+                                                ))}
+                                            </Listbox.Options>
+                                        </Transition>
+                                    </div>
+                                </Listbox>
+
+
                             </div>
-                        </div>
-                        <div className="mb-4">
-                            <label className="block mb-2">Cabinet Color or Material</label>
-                            <div className=" flex flex-row flex-wrap">
-                                <input
-                                    type="radio"
-                                    id="cabinetColor_Maple"
-                                    name="cabinetColor"
-                                    value="Maple"
-                                    onChange={handleChange}
-                                    className="hidden"
-                                    checked={formData.cabinetColor === 'Maple'}
-                                />
-                                <label
-                                    htmlFor="cabinetColor_Maple"
-                                    className="flex flex-col p-2 border-2 border-gray-700 cursor-pointer m-1 rounded rounded hover:bg-gray-600"
-                                >
-                                    <span className="text-xs font-semibold uppercase">Maple</span>
-                                </label>
-                                <input
-                                    type="radio"
-                                    id="cabinetColor_DarkGray"
-                                    name="cabinetColor"
-                                    value="Dark Gray"
-                                    onChange={handleChange}
-                                    className="hidden"
-                                />
-                                <label
-                                    htmlFor="cabinetColor_DarkGray"
-                                    className="flex flex-col p-2 border-2 border-gray-700 cursor-pointer m-1 rounded rounded hover:bg-gray-600"
-                                >
-                                    <span className="text-xs font-semibold uppercase">Dark Gray</span>
-                                </label>
-                                <input
-                                    type="radio"
-                                    id="cabinetColor_White"
-                                    name="cabinetColor"
-                                    value="White"
-                                    onChange={handleChange}
-                                    className="hidden"
-                                />
-                                <label
-                                    htmlFor="cabinetColor_White"
-                                    className="flex flex-col p-2 border-2 border-gray-700 cursor-pointer m-1 rounded rounded hover:bg-gray-600"
-                                >
-                                    <span className="text-xs font-semibold uppercase">White</span>
-                                </label>
+                            <div className="mb-4">
+                                <label className="block mb-2">Style</label>
+                                <Listbox value={setstyle} onChange={setStyleSelect}>
+                                    <div className="relative mb-3">
+                                        <Listbox.Button className="relative w-full cursor-pointer rounded-lg bg-zinc-600/50 py-2 pl-3 pr-10 text-left shadow-md focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white/75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm">
+                                            <span className="block truncate">{setstyle}</span>
+                                            <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
+
+                                            </span>
+                                        </Listbox.Button>
+                                        <Transition
+                                            leave="transition ease-in duration-100"
+                                            leaveFrom="opacity-100"
+                                            leaveTo="opacity-0"
+                                        >
+                                            <Listbox.Options className="absolute z-50 cursor-pointer mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black/5 focus:outline-none sm:text-sm">
+                                                {style.map((i) => (
+                                                    <Listbox.Option
+                                                        key={i}
+                                                        className={({ active }) =>
+                                                            `relative cursor-pointer select-none py-2 pl-10 pr-4 ${active ? 'bg-zinc-100 text-zinc-900' : 'text-gray-900'
+                                                            }`
+                                                        }
+                                                        value={i}
+                                                    >
+                                                        {({ selected }) => (
+                                                            <>
+                                                                <span
+                                                                    className={`block truncate ${selected ? 'font-medium' : 'font-normal'
+                                                                        }`}
+                                                                >
+                                                                    {i}
+                                                                </span>
+                                                                {selected ? (
+                                                                    <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-zinc-600">
+
+                                                                    </span>
+                                                                ) : null}
+                                                            </>
+                                                        )}
+                                                    </Listbox.Option>
+                                                ))}
+                                            </Listbox.Options>
+                                        </Transition>
+                                    </div>
+                                </Listbox>
                             </div>
-                        </div>
-                        <div className="mb-4">
-                            <label className="block mb-2">Hardware Finish</label>
-                            <div className="flex flex-row flex-wrap space-x-2">
-                                <input
-                                    type="radio"
-                                    id="hardwareFinish_PolishedChrome"
-                                    name="hardwareFinish"
-                                    value="Polished Chrome"
-                                    onChange={handleChange}
-                                    className="hidden"
-                                />
-                                <label
-                                    htmlFor="hardwareFinish_PolishedChrome"
-                                    className="flex flex-col p-2 border-2 border-gray-700 cursor-pointer m-1 rounded rounded hover:bg-gray-600"
-                                >
-                                    <span className="text-xs font-semibold uppercase">Polished Chrome</span>
-                                </label>
-                                <input
-                                    type="radio"
-                                    id="hardwareFinish_PolishedBrass"
-                                    name="hardwareFinish"
-                                    value="Polished Brass"
-                                    onChange={handleChange}
-                                    className="hidden"
-                                />
-                                <label
-                                    htmlFor="hardwareFinish_PolishedBrass"
-                                    className="flex flex-col p-2 border-2 border-gray-700 cursor-pointer m-1 rounded rounded hover:bg-gray-600"
-                                >
-                                    <span className="text-xs font-semibold uppercase">Polished Brass</span>
-                                </label>
-                                <input
-                                    type="radio"
-                                    id="hardwareFinish_SatinNickel"
-                                    name="hardwareFinish"
-                                    value="Satin Nickel"
-                                    onChange={handleChange}
-                                    className="hidden"
-                                    checked={formData.hardwareFinish === 'Satin nickel'}
-                                />
-                                <label
-                                    htmlFor="hardwareFinish_SatinNickel"
-                                    className="flex flex-col p-2 border-2 border-gray-700 cursor-pointer m-1 rounded rounded hover:bg-gray-600"
-                                >
-                                    <span className="text-xs font-semibold uppercase">Satin Nickel</span>
-                                </label>
-                                <input
-                                    type="radio"
-                                    id="hardwareFinish_OilRubbedBronze"
-                                    name="hardwareFinish"
-                                    value="Oil Rubbed Bronze"
-                                    onChange={handleChange}
-                                    className="hidden"
-                                />
-                                <label
-                                    htmlFor="hardwareFinish_OilRubbedBronze"
-                                    className="flex flex-col p-2 border-2 border-gray-700 cursor-pointer m-1 rounded rounded hover:bg-gray-600"
-                                >
-                                    <span className="text-xs font-semibold uppercase">Oil Rubbed Bronze</span>
-                                </label>
+                            <div className="mb-4">
+                                <label className="block mb-2">Color</label>
+                                <Listbox value={setcolor} onChange={setColorSelect}>
+                                    <div className="relative mb-3">
+                                        <Listbox.Button className="relative w-full  cursor-pointer rounded-lg bg-zinc-600/50 py-2 pl-3 pr-10 text-left shadow-md focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white/75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm">
+                                            <span className="block truncate">{setcolor}</span>
+                                            <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
+                                            </span>
+                                        </Listbox.Button>
+                                        <Transition
+                                            leave="transition ease-in duration-100"
+                                            leaveFrom="opacity-100"
+                                            leaveTo="opacity-0"
+                                        >
+                                            <Listbox.Options className="absolute z-50 cursor-pointer mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black/5 focus:outline-none sm:text-sm">
+                                                {color.map((i) => (
+                                                    <Listbox.Option
+                                                        key={i}
+                                                        className={({ active }) =>
+                                                            `relative cursor-pointer select-none py-2 pl-10 pr-4 ${active ? 'bg-zinc-100 text-zinc-900' : 'text-gray-900'
+                                                            }`
+                                                        }
+                                                        value={i}
+                                                    >
+                                                        {({ selected }) => (
+                                                            <>
+                                                                <span
+                                                                    className={`block truncate ${selected ? 'font-medium' : 'font-normal'
+                                                                        }`}
+                                                                >
+                                                                    {i}
+                                                                </span>
+                                                                {selected ? (
+                                                                    <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-zinc-600">
+
+                                                                    </span>
+                                                                ) : null}
+                                                            </>
+                                                        )}
+                                                    </Listbox.Option>
+                                                ))}
+                                            </Listbox.Options>
+                                        </Transition>
+                                    </div>
+                                </Listbox>
                             </div>
-                        </div>
-                        <div className="mb-4">
-                            <label className="block mb-2">Style</label>
-                            <div className="flex flex-row flex-wrap space-x-2">
-                                <input
-                                    type="radio"
-                                    id="style_Regular"
-                                    name="style"
-                                    value="Regular"
-                                    onChange={handleChange}
-                                    className="hidden"
-                                    checked={formData.style === 'Regular'}
-                                />
-                                <label
-                                    htmlFor="style_Regular"
-                                    className="flex flex-col p-2 border-2 border-gray-700 cursor-pointer m-1 rounded rounded hover:bg-gray-600"
-                                >
-                                    <span className="text-xs font-semibold uppercase">Regular</span>
-                                </label>
-                                <input
-                                    type="radio"
-                                    id="style_Minimalist"
-                                    name="style"
-                                    value="Minimalist"
-                                    onChange={handleChange}
-                                    className="hidden"
-                                />
-                                <label
-                                    htmlFor="style_Minimalist"
-                                    className="flex flex-col p-2 border-2 border-gray-700 cursor-pointer m-1 rounded rounded hover:bg-gray-600"
-                                >
-                                    <span className="text-xs font-semibold uppercase">Minimalist</span>
-                                </label>
-                                <input
-                                    type="radio"
-                                    id="style_Classic"
-                                    name="style"
-                                    value="Classic"
-                                    onChange={handleChange}
-                                    className="hidden"
-                                />
-                                <label
-                                    htmlFor="style_Classic"
-                                    className="flex flex-col p-2 border-2 border-gray-700 cursor-pointer m-1 rounded rounded hover:bg-gray-600"
-                                >
-                                    <span className="text-xs font-semibold uppercase">Classic</span>
-                                </label>
+                            <div className="mb-4">
+                                <label className="block mb-2">Accent</label>
+                                <Listbox value={setaccent} onChange={setAccentSelect}>
+                                    <div className="relative mb-3">
+                                        <Listbox.Button className="relative w-full cursor-pointer rounded-lg bg-zinc-600/50 py-2 pl-3 pr-10 text-left shadow-md focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white/75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm">
+                                            <span className="block truncate">{setaccent}</span>
+                                            <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
+
+                                            </span>
+                                        </Listbox.Button>
+                                        <Transition
+                                            leave="transition ease-in duration-100"
+                                            leaveFrom="opacity-100"
+                                            leaveTo="opacity-0"
+                                        >
+                                            <Listbox.Options className="absolute z-50 cursor-pointer mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black/5 focus:outline-none sm:text-sm">
+                                                {accent.map((i) => (
+                                                    <Listbox.Option
+                                                        key={i}
+                                                        className={({ active }) =>
+                                                            `relative cursor-pointer select-none py-2 pl-10 pr-4 ${active ? 'bg-zinc-100 text-zinc-900' : 'text-gray-900'
+                                                            }`
+                                                        }
+                                                        value={i}
+                                                    >
+                                                        {({ selected }) => (
+                                                            <>
+                                                                <span
+                                                                    className={`block truncate ${selected ? 'font-medium' : 'font-normal'
+                                                                        }`}
+                                                                >
+                                                                    {i}
+                                                                </span>
+                                                                {selected ? (
+                                                                    <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-zinc-600">
+
+                                                                    </span>
+                                                                ) : null}
+                                                            </>
+                                                        )}
+                                                    </Listbox.Option>
+                                                ))}
+                                            </Listbox.Options>
+                                        </Transition>
+                                    </div>
+                                </Listbox>
                             </div>
-                        </div>
+                            <div className="mb-4">
+                                <label className="block mb-2">Lighting</label>
+                                <Listbox value={setlighting} onChange={setLightingSelect}>
+                                    <div className="relative mb-3">
+                                        <Listbox.Button className="relative w-full cursor-pointer rounded-lg bg-zinc-600/50 py-2 pl-3 pr-10 text-left shadow-md focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white/75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm">
+                                            <span className="block truncate">{setlighting}</span>
+                                            <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
+
+                                            </span>
+                                        </Listbox.Button>
+                                        <Transition
+                                            leave="transition ease-in duration-100"
+                                            leaveFrom="opacity-100"
+                                            leaveTo="opacity-0"
+                                        >
+                                            <Listbox.Options className="absolute z-50 cursor-pointer mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black/5 focus:outline-none sm:text-sm">
+                                                {lighting.map((i) => (
+                                                    <Listbox.Option
+                                                        key={i}
+                                                        className={({ active }) =>
+                                                            `relative cursor-pointer select-none py-2 pl-10 pr-4 ${active ? 'bg-zinc-100 text-zinc-900' : 'text-gray-900'
+                                                            }`
+                                                        }
+                                                        value={i}
+                                                    >
+                                                        {({ selected }) => (
+                                                            <>
+                                                                <span
+                                                                    className={`block truncate ${selected ? 'font-medium' : 'font-normal'
+                                                                        }`}
+                                                                >
+                                                                    {i}
+                                                                </span>
+                                                                {selected ? (
+                                                                    <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-zinc-600">
+
+                                                                    </span>
+                                                                ) : null}
+                                                            </>
+                                                        )}
+                                                    </Listbox.Option>
+                                                ))}
+                                            </Listbox.Options>
+                                        </Transition>
+                                    </div>
+                                </Listbox>
+                            </div>
+
                         </div>
                         <div className="mb-4">
                             <label className="block mb-2">
@@ -294,17 +343,16 @@ function Sidebar(props: any) {
                             </label>
                             <input
                                 type="number"
-                                name="numberOfImages"
-                                value={formData.numberOfImages}
-                                onChange={handleChange}
+                                min="1"
+                                max="2"
+                                name="numberOfImages" value={setnum} onChange={(event) => setNumSelect(Number(event.target.value))}
                                 className="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md text-xl shadow-sm placeholder-gray-400
                                 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500
                                 disabled:bg-gray-50 text-gray-900 disabled:border-gray-200 disabled:shadow-none
-                                invalid:border-pink-500"
-                            />
+                                invalid:border-pink-500" />
                         </div>
                         <button
-                         id="submit_request"
+                            id="submit_request"
                             type="submit"
                             className="w-full bg-blue-500 text-white p-2 rounded"
                         >

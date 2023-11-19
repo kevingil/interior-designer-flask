@@ -14,7 +14,6 @@ def get_latest_renders(n):
     latest_images = cursor.fetchall()
 
     conn.close()
-
     return latest_images
 
 
