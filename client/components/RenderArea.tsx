@@ -39,7 +39,7 @@ function RenderArea(props: any) {
                     <img onClick={() => openModal(index)}
                       key={index}
                       src={image}
-                      className="max-w-full sm:max-h-[500px] mx-auto rounded-xl max-w-[60%] sm:max-w-[40%]"
+                      className="max-w-full sm:max-h-[500px] mx-auto rounded-xl max-w-[65%] sm:max-w-[45%]"
                     />
                   ))
                 ) : (
@@ -90,44 +90,27 @@ function RenderArea(props: any) {
                   <div className="mt-2 w-full">
                     {selectedImageIndex !== null && (
                       <>
-                        <p>Selected Index: {selectedImageIndex}</p>
-                        <p>Images Array: {JSON.stringify(props.response.images)}</p>
-                        <Image
-                          src={props.response.images[selectedImageIndex]?.image}
+                        <p className='hidden'>Selected Index: {selectedImageIndex}</p>
+                        <p className='hidden'>Images Array: {JSON.stringify(props.response.images)}</p>
+                        <img
+                          src={props.response.images[selectedImageIndex]}
                           width={300}
                           height={300}
                           alt=""
-                          priority={false}
                           className="rounded-xl w-full"
-                          placeholder="blur"
-                          blurDataURL={blurredImage}
                         />
                       </>
                     )}
                   </div>
-
-                  <div className="mt-2 w-full">
-                    {selectedImageIndex !== null && (
-                      <Image
-                        src={props.response.images[selectedImageIndex].image}
-                        width={300}
-                        height={300}
-                        alt=""
-                        priority={false}
-                        className="rounded-xl w-full"
-                        placeholder="blur" blurDataURL={blurredImage}
-                      />
-                    )}
-
-                  </div>
-
                   <div className="mt-6 flex justify-end gap-4">
                     {selectedImageIndex !== null && (
-                      <a href={props.response.images[selectedImageIndex].image}
-                        download={props.response.images[selectedImageIndex].image}
+                      <>
+                      <a href={props.response.images[selectedImageIndex]} target="_blank"
+                        download={props.response.images[selectedImageIndex]}
                         className="inline-flex justify-center rounded-md border-none border-transparent bg-zinc-500 px-4 py-2 text-sm font-medium text-white hover:bg-zinc-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-purple-600 focus-visible:ring-offset-2">
                         Download
                       </a>
+                      </>
                     )}
                     <button
                       type="button"
