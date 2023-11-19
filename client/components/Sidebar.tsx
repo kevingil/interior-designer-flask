@@ -93,11 +93,11 @@ function Sidebar(props: any) {
 
     return (
         <aside className="">
-            <div className='bg-stone-900/90 backdrop-blur-sm rounded-xl shadow p-4 sm:w-[250px]'>
+            <div className='bg-stone-900/50 backdrop-blur-sm rounded-xl p-4 sm:w-[250px]'>
                 <p className='text-xl pb-2'>Generate <span className="inline text-sm">({ping_message})</span></p>
                 <div>
                     <form onSubmit={handleSubmit} className=''>
-                        <div className="form overflow-hidden">
+                        <div className="form">
                             <div>
                                 <label className="block  mb-2">Space</label>
 
