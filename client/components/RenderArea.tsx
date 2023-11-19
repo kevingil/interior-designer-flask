@@ -19,7 +19,7 @@ function RenderArea(props: any) {
     setIsOpen(true);
   }
   return (
-    <div className="backdrop-blur-sm rounded-xl shadow p-4 grow sm:h-full">
+    <div className="backdrop-blur-sm rounded-xl p-4 grow sm:h-full">
       <p className='text-xl'>Image Render</p>
 
       <div className="flex justify-center items-center h-full">
@@ -65,7 +65,7 @@ function RenderArea(props: any) {
             leaveFrom="opacity-100"
             leaveTo="opacity-0"
           >
-            <div className="fixed inset-0 bg-black/50" />
+            <div className="fixed inset-0 bg-black/75" />
           </Transition.Child>
 
           <div className="fixed inset-0 overflow-y-auto">

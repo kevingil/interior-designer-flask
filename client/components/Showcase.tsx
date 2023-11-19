@@ -67,7 +67,7 @@ function Showcase() {
                   leaveFrom="opacity-100"
                   leaveTo="opacity-0"
                 >
-      <div className="bg-stone-900/90 backdrop-blur-sm rounded-xl shadow p-4 w-full mt-2">
+      <div className="bg-stone-900/50 backdrop-blur-sm rounded-xl shadow p-4 w-full mt-2">
         <div className='grid grid-cols-2 sm:grid-cols-4 gap-4'>
           {isLoading ? (
             <>
@@ -98,7 +98,7 @@ function Showcase() {
                       blurDataURL={blurredImage}
                       alt=""
                       priority={false}
-                      className='rounded-xl hover:'
+                      className='rounded-xl shadow hover:shadow-xl'
                     />
                   </div>
                 
@@ -121,7 +121,7 @@ function Showcase() {
             leaveFrom="opacity-100"
             leaveTo="opacity-0"
           >
-            <div className="fixed inset-0 bg-black/50" />
+            <div className="fixed inset-0 bg-black/75" />
           </Transition.Child>
 
           <div className="fixed inset-0 overflow-y-auto">

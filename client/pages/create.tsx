@@ -53,12 +53,12 @@ function Create() {
       <Transition
         as={Fragment}
         show={isShowing}
-        enter="transform transition ease-in-out duration-500 sm:duration-700"
-        enterFrom="translate-x-full"
-        enterTo="translate-x-0"
-        leave="transform transition ease-in-out duration-500 sm:duration-700"
-        leaveFrom="translate-x-0"
-        leaveTo="translate-x-full"
+        enter="transition-opacity sm:transform sm:transition sm:ease-in-out duration-500 sm:duration-700"
+        enterFrom="opacity-0 sm:translate-x-full"
+        enterTo="opacity-100 sm:translate-x-0"
+        leave="transition-opacity sm:transform sm:transition sm:ease-in-out duration-500 sm:duration-700"
+        leaveFrom="opacity-100 sm:translate-x-0"
+        leaveTo="opacity-0 sm:translate-x-full"
       ><div><Sidebar updateResponse={updateResponse} setLoading={setLoading} /></div>
       </Transition>
       </div>
