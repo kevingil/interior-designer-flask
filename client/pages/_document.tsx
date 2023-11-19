@@ -6,7 +6,12 @@ export default function Document() {
       <Head />
       <title>Interior Designer.AI</title>
       <body>
-        <Main/>
+        <div className="blob-cont">
+          <div className="yellow blob"></div>
+          <div className="red blob"></div>
+          <div className="green blob"></div>
+        </div>
+        <Main />
         <NextScript />
       </body>
     </Html>
