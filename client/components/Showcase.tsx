@@ -1,16 +1,26 @@
 import { Dialog, Transition } from '@headlessui/react'
 import { useEffect, useState, Fragment } from 'react';
 import Image from 'next/image'
-import Link from 'next/link';
 
 
 function Showcase() {
   const [isOpen, setIsOpen] = useState(false);
+  let [isShowing, setIsShowing] = useState(false)
+  useEffect(() => {
+    const timeoutId = setTimeout(() => {
+      setIsShowing(true);
+    }, 500);
+  
+    return () => {
+      clearTimeout(timeoutId);
+    };
+  }, []); 
   const [latestImages, setLatestImages] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [selectedImageIndex, setSelectedImageIndex] = useState(null);
 
   let api_gallery_latest_url = "";
+  let blurredImage = "https://cdn.kevingil.com/blur.png";
 
   function closeModal() {
     setIsOpen(false);
@@ -25,7 +35,7 @@ function Showcase() {
   if (process.env.NODE_ENV === 'development') {
     api_gallery_latest_url = "http://localhost:5000/api/gallery_latest"
   } else {
-    api_gallery_latest_url = "http://147.182.233.135:5000/api/gallery_latest"
+    api_gallery_latest_url = "http://147.182.233.135:5000/api/gallery_latestt"
   }
 
   useEffect(() => {
@@ -44,17 +54,19 @@ function Showcase() {
   }, []);
 
 
+
   return (
     <div className='max-w-[900px] mx-auto'>
-      <div className='h-64 px-6 sm:px-14'>
-        <div className='text-left pt-8'>
-          <p id='' className='text-2xl sm:text-3xl home_title'><span className='text-4xl sm:text-5xl font-semibold'>Interior Designer AI</span><br></br>Design your dream home</p>
-          <p className='text-right mx-4 my-8'>
-            <Link id="home_create" href="/create"
-              className='border-solid text-xs sm:text-xl border-2 border-sky-500 mx-4 px-4 sm:px-8 py-2 sm:py-3 rounded-[3rem]'>Create Now</Link></p>
-
-        </div>
-      </div>
+      <Transition
+                  className=""
+                  show={isShowing}
+                  enter="transition-all ease-in-out duration-500"
+                  enterFrom="opacity-0 translate-y-6"
+                  enterTo="opacity-100 translate-y-0"
+                  leave="transition-all ease-in-out duration-500"
+                  leaveFrom="opacity-100"
+                  leaveTo="opacity-0"
+                >
       <div className="bg-stone-900/90 backdrop-blur-sm rounded-xl shadow p-4 w-full mt-2">
         <div className='grid grid-cols-2 sm:grid-cols-4 gap-4'>
           {isLoading ? (
@@ -73,18 +85,30 @@ function Showcase() {
             </>
           ) : (
             !isLoading && latestImages.map((image, index) => {
-              console.log("Image URL:", image[4]);
               return (
-                <>
-                  <div key={index} className="max-w-full sm:max-h-[300px] cursor-pointer sm:p-1" onClick={() => openModal(index)}>
-                    <Image src={image[4]} width={300} height={300} alt="" priority={false} className='rounded-xl hover:'/>
+                <div key={index} className="max-w-full cursor-pointer sm:p-1">
+                
+                  <div key={index} onClick={() => openModal(index)}>
+                    <Image
+                      key={index}
+                      src={image[4]}
+                      width={300}
+                      height={300}
+                      placeholder="blur"
+                      blurDataURL={blurredImage}
+                      alt=""
+                      priority={false}
+                      className='rounded-xl hover:'
+                    />
                   </div>
-                </>
+                
+              </div>
               );
             })
           )}
         </div>
       </div>
+      </Transition>
 
       <Transition appear show={isOpen} as={Fragment}>
         <Dialog as="div" className="relative z-10" onClose={closeModal}>
@@ -127,24 +151,32 @@ function Showcase() {
                         alt=""
                         priority={false}
                         className="rounded-xl w-full"
+                        placeholder="blur" blurDataURL={blurredImage}
                       />
                     )}
 
                     {selectedImageIndex !== null && (
-                      <div className='flex mt-4 gap-2 font-semibold text-sm text-gray-900'>
-                        <span className='rounded-full px-2 bg-gray-200'>API: {latestImages[selectedImageIndex][3]}</span>
-                        <span className='rounded-full px-2 bg-gray-200'>Date: {latestImages[selectedImageIndex][2]}</span>
+                      <div className='flex mt-4 gap-2 font-semibold text-xs sm:text-sm'>
+                        <span className='px-2'>Date: {latestImages[selectedImageIndex][2]}</span>
+                        <span className='px-2'>API: {latestImages[selectedImageIndex][3]}</span>
+                        <span className='px-2'>Render time: {(Number(latestImages[selectedImageIndex][1])).toFixed(2) + "s"}</span>
                       </div>
                     )}
 
                   </div>
 
-                  <div className="mt-4 flex justify-end">
+                  <div className="mt-6 flex justify-end gap-4">
+                    {selectedImageIndex !== null && (
+                      <a href={latestImages[selectedImageIndex][4]}
+                        download={latestImages[selectedImageIndex][4]}
+                        className="inline-flex justify-center rounded-md border-none border-transparent bg-zinc-500 px-4 py-2 text-sm font-medium text-white hover:bg-zinc-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-purple-600 focus-visible:ring-offset-2">
+                        Download
+                      </a>
+                    )}
                     <button
                       type="button"
                       className="inline-flex justify-center rounded-md border border-transparent bg-purple-500 px-4 py-2 text-sm font-medium text-white hover:bg-purple-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-purple-600 focus-visible:ring-offset-2"
-                      onClick={closeModal}
-                    >
+                      onClick={closeModal}>
                       Close
                     </button>
                   </div>

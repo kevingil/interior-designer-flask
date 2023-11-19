@@ -64,7 +64,18 @@ input:checked + label {
 
 .home_title {
 	background-image: linear-gradient(-20deg, #cdbaff 30%, #cbfdfb 100%);
-	text-shadow: 1px 1px 7px rgba(228, 228, 228, 0.25);
+	text-shadow: 1px 1px 10px rgba(228, 228, 228, 0.25);
+	 background-size: 100%;
+	 background-repeat: repeat;
+	 -webkit-background-clip: text;
+	 -webkit-text-fill-color: transparent; 
+	 -moz-background-clip: text;
+	 -moz-text-fill-color: transparent;
+}
+
+.home_title_nav {
+	background-image: linear-gradient(-20deg, #cdbaff 30%, #cbfdfb 100%);
+	text-shadow: 1px 1px 10px rgba(228, 228, 228, 0.1);
 	 background-size: 100%;
 	 background-repeat: repeat;
 	 -webkit-background-clip: text;
