@@ -76,7 +76,7 @@ input:checked+label {
 
 
 .home_title {
-    background-image: linear-gradient(-20deg, #eae4fa 70%, rgb(239, 249, 255) 100%);
+    background-image: linear-gradient(-20deg, #5835bb 0%, rgb(232, 246, 255) 65%);
     filter: drop-shadow(1px 1px 1px rgba(63, 32, 87, 0.75));
     background-size: 100%;
     background-repeat: repeat;
@@ -87,7 +87,7 @@ input:checked+label {
 }
 
 .home_title_nav {
-    background-image: linear-gradient(-20deg, #cdbaff 30%, #cbfdfb 100%);
+    background-image: linear-gradient(-20deg, #cdbaff 30%, #dbfffe 80%);
     text-shadow: 1px 1px 10px rgba(228, 228, 228, 0.1);
     background-size: 100%;
     background-repeat: repeat;
@@ -121,7 +121,7 @@ input:checked+label {
     left: 100px;
     height: 200px;
     width: 200px;
-    animation: yellow 12s infinite ease;
+    animation: yellow 10s infinite ease;
 }
 
 .green {
@@ -132,7 +132,7 @@ input:checked+label {
     height: 200px;
     width: 250px;
 
-    animation: green 12s infinite ease;
+    animation: green 10s infinite ease;
 }
 
 .red {
@@ -142,7 +142,7 @@ input:checked+label {
     top: 300px;
     height: 250px;
     width: 200px;
-    animation: red 12s infinite linear;
+    animation: red 10s infinite linear;
 }
 
 @keyframes yellow {
