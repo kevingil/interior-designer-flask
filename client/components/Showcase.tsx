@@ -86,9 +86,8 @@ function Showcase() {
           ) : (
             !isLoading && latestImages.map((image, index) => {
               return (
-                <div key={index} className="max-w-full cursor-pointer sm:p-1">
-                
-                  <div key={index} onClick={() => openModal(index)}>
+                <div key={index} className="max-h-full overflow-hidden cursor-pointer sm:p-1">
+                  <div className="h-full flex object-cover" key={index} onClick={() => openModal(index)}>
                     <Image
                       key={index}
                       src={image[4]}
@@ -98,7 +97,7 @@ function Showcase() {
                       blurDataURL={blurredImage}
                       alt=""
                       priority={false}
-                      className='rounded-xl shadow hover:shadow-xl'
+                      className='rounded-xl shadow hover:shadow-xl object-cover h-full aspect-square'
                     />
                   </div>
                 

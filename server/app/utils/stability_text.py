@@ -14,7 +14,7 @@ os.environ['STABILITY_HOST'] = 'grpc.stability.ai:443'
 load_dotenv()
 os.environ['STABILITY_KEY'] = os.getenv("STABILITYAI_API_KEY")
 
-r_seed = random.randint(10**9, 10**10 - 1)
+r_seed = random.randint(10**8, 10**9 - 1)
 
 
 def stability_text_to_image(prompt, num):
@@ -26,13 +26,9 @@ def stability_text_to_image(prompt, num):
         # List of available engines: https://platform.stability.ai/docs/features/api-parameters#engine
     )
 
-    req_prompt = 'Kitchen interior design render'
-    req_num = 1
+    req_prompt = prompt
+    req_num = num
     res_image_bytes = []
-    if (prompt):
-        req_num = prompt
-    if (num):
-        req_num = num
 
     # Set up our initial generation parameters.
     answers = stability_api.generate(
@@ -62,8 +58,6 @@ def stability_text_to_image(prompt, num):
                     "Your request activated the API's safety filters and could not be processed."
                     "Please modify the prompt and try again.")
             if artifact.type == generation.ARTIFACT_IMAGE:
-                img = Image.open(io.BytesIO(artifact.binary))
-                img.save(str(artifact.seed)+ ".png") # Save our generated images with their seed number as the filename.
                 res_image_bytes.append(artifact.binary)
     
     
