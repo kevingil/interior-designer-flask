@@ -12,7 +12,7 @@ const HomeNav = () => {
     if (el.current) {
       const typed = new Typed(el.current, {
         strings: ['Design your dream home.', 'Design your dream kitchen.', 'Design your dream living room.', 'Design your dream bath.', 'Design your dream dining room.'],
-        typeSpeed: 50,
+        typeSpeed: 40,
         smartBackspace: true,
         loop: true,
       });
@@ -42,7 +42,7 @@ const HomeNav = () => {
         </nav>
         <div className='h-64 px-6 sm:px-14 max-w-[900px] mx-auto'>
           <div className='text-left pt-8'>
-            <p id='' className='text-2xl sm:text-3xl home_title'><span className='text-4xl sm:text-5xl font-semibold'>Interior Designer AI</span><br></br><span className='home_title' ref={el}/></p>
+            <p id='' className='text-2xl sm:text-3xl'><span className='text-4xl sm:text-5xl font-semibold'>Interior <span className='home_title'>Designer AI</span></span><br></br><span className='text-white' ref={el}/></p>
             <p className='text-right mx-4 my-8'>
               <Link id="home_create" href="/create"
                 className='border-solid text-xs sm:text-xl border-2 border-sky-500 mx-4 px-4 sm:px-8 py-2 sm:py-3 rounded-[3rem]'>Create Now</Link></p>

@@ -15,10 +15,10 @@ function Sidebar(props: any) {
 
     if (process.env.NODE_ENV === 'development') {
         api_ping_url = "http://localhost:5000/api/ping"
-        api_generate_url = "http://localhost:5000/api/generate_test"
+        api_generate_url = "http://localhost:5000/api/stability_generate_test"
     } else {
         api_ping_url = "http://147.182.233.135:5000/api/ping"
-        api_generate_url = "http://147.182.233.135:5000/api/generate_test"
+        api_generate_url = "http://147.182.233.135:5000/api/stability_generate_test"
     }
 
     const [ping_message, setMessage] = useState("Testing connection");
