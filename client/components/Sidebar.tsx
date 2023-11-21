@@ -31,7 +31,7 @@ function Sidebar(props: any) {
             })
             .catch((error) => {
                 console.error('API error:', error)
-                setMessage('Server Offline')
+                setMessage(`Offline`)
             });
     }, []);
 
@@ -94,7 +94,7 @@ function Sidebar(props: any) {
     return (
         <aside className="">
             <div className='bg-stone-900/50 backdrop-blur-sm rounded-xl p-4 sm:w-[250px]'>
-                <p className='text-xl pb-2'>Generate <span className="inline text-sm">({ping_message})</span></p>
+                <p className='text-xl pb-4'>Generate <span className="inline text-sm hidden">({ping_message})</span></p>
                 <div>
                     <form onSubmit={handleSubmit} className=''>
                         <div className="form">
@@ -344,7 +344,7 @@ function Sidebar(props: any) {
                             <input
                                 type="number"
                                 min="1"
-                                max="2"
+                                max="4"
                                 name="numberOfImages" value={setnum} onChange={(event) => setNumSelect(Number(event.target.value))}
                                 className="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md text-xl shadow-sm placeholder-gray-400
                                 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500
