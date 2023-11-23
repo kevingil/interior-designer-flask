@@ -14,7 +14,7 @@ os.environ['STABILITY_HOST'] = 'grpc.stability.ai:443'
 load_dotenv()
 os.environ['STABILITY_KEY'] = os.getenv("STABILITYAI_API_KEY")
 
-r_seed = random.randint(10**8, 10**9 - 1)
+#r_seed = random.randint(10**8, 10**9 - 1)
 
 
 def stability_text_to_image(prompt, num):
@@ -33,7 +33,7 @@ def stability_text_to_image(prompt, num):
     # Set up our initial generation parameters.
     answers = stability_api.generate(
         prompt=req_prompt,
-        seed=r_seed, # If a seed is provided, the resulting generated image will be deterministic.
+        seed=-1, # If a seed is provided, the resulting generated image will be deterministic.
                         # What this means is that as long as all generation parameters remain the same, you can always recall the same image simply by generating it again.
                         # Note: This isn't quite the case for Clip Guided generations, which we'll tackle in a future example notebook
                         # Default 4253978046
