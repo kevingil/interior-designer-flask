@@ -4,8 +4,6 @@ WORKDIR /app
 
 COPY server/ .
 
-RUN apk update && apk add ca-certificates
-
 RUN pip install -r requirements.txt
 
 EXPOSE 5000
