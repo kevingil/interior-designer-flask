@@ -1,5 +1,6 @@
 from flask import Blueprint, request, jsonify
 from flask_cors import CORS
+from flask_sslify import SSLify
 from ..utils.prompt import generate_prompt
 from ..utils.generate_image_test import generate_image_test
 from ..utils.r2 import *
