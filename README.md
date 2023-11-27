@@ -2,10 +2,13 @@
 >Generate interior design renders with Stable Diffusion XL
 
 
+This project has been forked to a production repository
+
+
+[Link](https://interiordesigner-ai.com/)
+
+
 ![IDAI.png](https://cdn.kevingil.com/interior-designer-11-23.png)
-
-
-See it live here: [DEMO](http://147.182.233.135:3000/)
 
 
 ## Develop
